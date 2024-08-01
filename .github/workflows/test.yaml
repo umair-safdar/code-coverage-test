@@ -1,0 +1,32 @@
+name: CI
+
+on: 
+  push: 
+  pull_request:
+
+jobs:
+  run-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-versions:
+          - "3.10"
+          - "3.11"
+    name: Test Job
+    runs-on: ${{matrix.os}}  
+
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{matrix.python-versions}} 
+
+      - name: Install Dependencies
+        run: python -m pip pytest .
+
+      - name: Run tests
+        run: pytest
