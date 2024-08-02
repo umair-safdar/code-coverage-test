@@ -30,7 +30,7 @@ jobs:
 
       - name: Run tests
         run: pytest --cov=main --cov-report=term --cov-report=xml
-        #test comment
+        #test comment, trigger change
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
