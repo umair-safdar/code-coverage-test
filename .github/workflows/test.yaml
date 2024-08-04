@@ -35,6 +35,9 @@ jobs:
         run: coverage xml -o coverage_cobertura.xml
         #test comment, trigger change
 
+      - name: Make lcov file
+        run: coverage lcov -o coverage_current.lcov
+
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
