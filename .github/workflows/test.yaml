@@ -1,9 +1,7 @@
-name: CI
+name: PR Coverage Diff - CI
 
 on: 
-  push: 
   pull_request:
-
 jobs:
   run-tests:
     strategy:
@@ -11,14 +9,35 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         python-versions:
-          - "3.10"
           - "3.11"
     name: Test Job
     runs-on: ${{matrix.os}}  
 
     steps: 
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout target branch to get old lcov file
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+
+      - name: Get old lcov file
+        run: mv old-lcov/old-lcov.lcov old-lcov.lcov
+
+      - name: Upload old lcov file
+        uses: actions/upload-artifact@v3
+        with:
+          name: old-lcov
+          path: old-lcov.lcov
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      
+      - name: Download old lcov file
+        uses: actions/download-artifact@v3
+        with:
+          name: old-lcov
+          path: .
 
       - name: Set up python
         uses: actions/setup-python@v4
@@ -36,7 +55,7 @@ jobs:
         #test comment, trigger change
 
       - name: Make lcov file
-        run: coverage lcov -o coverage_current.lcov
+        run: coverage lcov -o current-lcov.lcov
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
@@ -63,11 +82,39 @@ jobs:
         uses: barecheck/code-coverage-action@v1
         with:
           barecheck-github-app-token: ${{ secrets.BARECHECK_GITHUB_APP_TOKEN }}
-          lcov-file: "coverage_current.lcov"
-          base-lcov-file: "./old-lcov/coverage_old.lcov"
+          lcov-file: "current-lcov.lcov"
+          base-lcov-file: "old-lcov.lcov"
           #minimum-ratio: 0 # Fails Github action once code coverage is decreasing
           send-summary-comment: true
           show-annotations: "warning" # Possible options warning|error
 
-      - name: Move existing file to old folder after comparison
-        run: mv coverage_current.lcov ./old-lcov/coverage_old.lcov
+      - name: Upload current lcov file
+        uses: actions/upload-artifact@v3
+        with:
+          name: current-lcov
+          path: current-lcov.lcov
+
+      - name: Checkout target branch again
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+
+      - name: Download current lcov file
+        uses: actions/download-artifact@v3
+        with:
+          name: current-lcov
+          path: .
+      
+      - name: Copy new lcov file to target branch
+        run: mv current-lcov.lcov old-lcov/old-lcov.lcov
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m 'Update lcov file with new coverage data'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
