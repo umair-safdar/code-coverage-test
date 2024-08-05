@@ -22,14 +22,22 @@ jobs:
       - name: Get old lcov file
         run: mv old-lcov/old-lcov.lcov old-lcov.lcov
 
+      - name: Upload old lcov file
+        uses: actions/upload-artifact@v3
+        with:
+          name: old-lcov
+          path: old-lcov.lcov
 
       - name: Checkout PR branch
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
       
-      #- name: Checkout code
-      #  uses: actions/checkout@v3
+      - name: Download old lcov file
+        uses: actions/download-artifact@v3
+        with:
+          name: old-lcov
+          path: .
 
       - name: Set up python
         uses: actions/setup-python@v4
@@ -80,8 +88,11 @@ jobs:
           send-summary-comment: true
           show-annotations: "warning" # Possible options warning|error
 
-      - name: Move existing file to old folder after comparison
-        run: mv coverage_current.lcov ./old-lcov/coverage_old.lcov
+      - name: Upload current lcov file
+        uses: actions/upload-artifact@v3
+        with:
+          name: current-lcov
+          path: current-lcov.lcov
 
       - name: Checkout target branch again
         uses: actions/checkout@v2
@@ -89,6 +100,12 @@ jobs:
           ref: ${{ github.event.pull_request.base.ref }}
           fetch-depth: 0
 
+      - name: Download current lcov file
+        uses: actions/download-artifact@v3
+        with:
+          name: current-lcov
+          path: .
+      
       - name: Copy new lcov file to target branch
         run: mv current-lcov.lcov old-lcov/old-lcov.lcov
 
@@ -100,4 +117,4 @@ jobs:
           git commit -m 'Update lcov file with new coverage data'
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
