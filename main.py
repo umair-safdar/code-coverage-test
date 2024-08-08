@@ -1,5 +1,3 @@
-# main.py
-
 class Calculator:
     def add(self, a, b):
         return a + b
@@ -18,6 +16,8 @@ class Calculator:
 
 class Greeter:
     def __init__(self, name):
+        if name is None:
+            raise ValueError("Name cannot be None")
         self.name = name
 
     def greet(self):
@@ -60,27 +60,3 @@ def fibonacci(n):
         for i in range(2, n):
             fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
         return fib_sequence
-
-
-if __name__ == "__main__":
-    # Calculator
-    calc = Calculator()
-    print(calc.add(2, 3))
-    print(calc.subtract(10, 5))
-    print(calc.multiply(4, 5))
-    print(calc.divide(20, 4))
-
-    # Greeter
-    greeter = Greeter("Alice")
-    print(greeter.greet())
-    print(greeter.farewell())
-
-    # Factorial
-    print(factorial(5))
-
-    # Prime check
-    print(is_prime(7))
-    print(is_prime(4))
-
-    # Fibonacci
-    print(fibonacci(10))
