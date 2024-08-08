@@ -61,7 +61,7 @@ jobs:
         run:  pytest --json-report --json-report-summary
 
       - name: Rename and relocate it
-        run: mv .report.json coverage/coverage-summary.json
+        run: mkdir coverage && mv .report.json coverage/coverage-summary.json
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
