@@ -60,6 +60,9 @@ jobs:
       - name: Make coverage summary file
         run:  pytest --json-report-summary --json-report-file=coverage/
 
+      - name: Rename it
+        run: mv coverage/.report.json coverage-summary.json
+
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
