@@ -58,6 +58,9 @@ jobs:
           fail-under-coverage-percentage: 'true'
           cobertura-path: ./coverage.xml
           junit-path: ./result.xml
+          show-diffcover: 'true'
+          
+
       # - name: Convert schema
       #   run: coverage xml -o coverage_cobertura.xml
       #   #test comment, trigger change
