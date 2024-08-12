@@ -61,31 +61,53 @@ def fibonacci(n):
             fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
         return fib_sequence
 
+# # New functions added without test cases
+
+# def calculate_bmi(weight, height):
+#     """
+#     Calculate BMI (Body Mass Index)
+#     weight: in kilograms
+#     height: in meters
+#     """
+#     if height <= 0:
+#         raise ValueError("Height must be greater than zero")
+#     bmi = weight / (height ** 2)
+#     return round(bmi, 2)
+
+# def reverse_string(s):
+#     """
+#     Reverse a given string
+#     """
+#     return s[::-1]
+
+# def generate_password(length=12):
+#     """
+#     Generate a random password of given length
+#     """
+#     import random
+#     import string
+#     characters = string.ascii_letters + string.digits + string.punctuation
+#     password = ''.join(random.choice(characters) for _ in range(length))
+#     return password
+
 # New functions added without test cases
 
-def calculate_bmi(weight, height):
+def celsius_to_fahrenheit(celsius):
     """
-    Calculate BMI (Body Mass Index)
-    weight: in kilograms
-    height: in meters
+    Convert Celsius to Fahrenheit
     """
-    if height <= 0:
-        raise ValueError("Height must be greater than zero")
-    bmi = weight / (height ** 2)
-    return round(bmi, 2)
+    return (celsius * 9/5) + 32
 
-def reverse_string(s):
+def count_vowels(string):
     """
-    Reverse a given string
+    Count the number of vowels in a string
     """
-    return s[::-1]
+    vowels = 'aeiouAEIOU'
+    return sum(1 for char in string if char in vowels)
 
-def generate_password(length=12):
+def is_palindrome(s):
     """
-    Generate a random password of given length
+    Check if a string is a palindrome
     """
-    import random
-    import string
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
+    s = ''.join(char.lower() for char in s if char.isalnum())
+    return s == s[::-1]
