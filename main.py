@@ -92,22 +92,22 @@ def generate_password(length=12):
 
 # New functions added without test cases
 
-def celsius_to_fahrenheit(celsius):
-    """
-    Convert Celsius to Fahrenheit
-    """
-    return (celsius * 9/5) + 32
+# def celsius_to_fahrenheit(celsius):
+#     """
+#     Convert Celsius to Fahrenheit
+#     """
+#     return (celsius * 9/5) + 32
 
-def count_vowels(string):
-    """
-    Count the number of vowels in a string
-    """
-    vowels = 'aeiouAEIOU'
-    return sum(1 for char in string if char in vowels)
+# def count_vowels(string):
+#     """
+#     Count the number of vowels in a string
+#     """
+#     vowels = 'aeiouAEIOU'
+#     return sum(1 for char in string if char in vowels)
 
-def is_palindrome(s):
-    """
-    Check if a string is a palindrome
-    """
-    s = ''.join(char.lower() for char in s if char.isalnum())
-    return s == s[::-1]
+# def is_palindrome(s):
+#     """
+#     Check if a string is a palindrome
+#     """
+#     s = ''.join(char.lower() for char in s if char.isalnum())
+#     return s == s[::-1]
