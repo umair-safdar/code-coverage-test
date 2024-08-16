@@ -80,15 +80,15 @@ def fibonacci(n):
 #     """
 #     return s[::-1]
 
- def generate_password(length=12):
+def generate_password(length=12):
 #     """
 #     Generate a random password of given length
 #     """
-     import random
-     import string
-     characters = string.ascii_letters + string.digits + string.punctuation
-     password = ''.join(random.choice(characters) for _ in range(length))
-     return password
+    import random
+    import string
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
 
 # New functions added without test cases
 
