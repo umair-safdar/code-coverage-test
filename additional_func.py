@@ -1,3 +1,9 @@
+def reverse_string(s):
+    """
+    Reverse a given string
+    """
+    return s[::-1]
+
 def celsius_to_fahrenheit(celsius):
     """
     Convert Celsius to Fahrenheit
