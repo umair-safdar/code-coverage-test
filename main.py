@@ -13,13 +13,6 @@ class Calculator:
             raise ValueError("Cannot divide by zero")
         return a / b
 
-# # New functions added without test cases
-def reverse_string(s):
-    """
-    Reverse a given string
-    """
-    return s[::-1]
-
 def generate_password(length=12):
 #     """
 #     Generate a random password of given length
@@ -90,23 +83,17 @@ def calculate_bmi(weight, height):
     bmi = weight / (height ** 2)
     return round(bmi, 2)
 
-# def reverse_string(s):
+def generate_password(length=12):
 #     """
-#     Reverse a given string
+#     Generate a random password of given length
 #     """
-#     return s[::-1]
+    import random
+    import string
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
 
-# def generate_password(length=12):
-# #     """
-# #     Generate a random password of given length
-# #     """
-#     import random
-#     import string
-#     characters = string.ascii_letters + string.digits + string.punctuation
-#     password = ''.join(random.choice(characters) for _ in range(length))
-#     return password
-
-# New functions added without test cases
+# New functions added without test cases(2)
 
 # def celsius_to_fahrenheit(celsius):
 #     """
