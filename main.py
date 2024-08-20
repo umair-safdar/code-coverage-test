@@ -63,16 +63,16 @@ def fibonacci(n):
 
 # # New functions added without test cases
 
-# def calculate_bmi(weight, height):
-#     """
-#     Calculate BMI (Body Mass Index)
-#     weight: in kilograms
-#     height: in meters
-#     """
-#     if height <= 0:
-#         raise ValueError("Height must be greater than zero")
-#     bmi = weight / (height ** 2)
-#     return round(bmi, 2)
+def calculate_bmi(weight, height):
+    """
+    Calculate BMI (Body Mass Index)
+    weight: in kilograms
+    height: in meters
+    """
+    if height <= 0:
+        raise ValueError("Height must be greater than zero")
+    bmi = weight / (height ** 2)
+    return round(bmi, 2)
 
 # def reverse_string(s):
 #     """
