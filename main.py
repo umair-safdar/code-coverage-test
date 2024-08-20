@@ -13,6 +13,22 @@ class Calculator:
             raise ValueError("Cannot divide by zero")
         return a / b
 
+# # New functions added without test cases
+def reverse_string(s):
+    """
+    Reverse a given string
+    """
+    return s[::-1]
+
+def generate_password(length=12):
+#     """
+#     Generate a random password of given length
+#     """
+    import random
+    import string
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
 
 class Greeter:
     def __init__(self, name):
@@ -63,16 +79,16 @@ def fibonacci(n):
 
 # # New functions added without test cases
 
-# def calculate_bmi(weight, height):
-#     """
-#     Calculate BMI (Body Mass Index)
-#     weight: in kilograms
-#     height: in meters
-#     """
-#     if height <= 0:
-#         raise ValueError("Height must be greater than zero")
-#     bmi = weight / (height ** 2)
-#     return round(bmi, 2)
+def calculate_bmi(weight, height):
+    """
+    Calculate BMI (Body Mass Index)
+    weight: in kilograms
+    height: in meters
+    """
+    if height <= 0:
+        raise ValueError("Height must be greater than zero")
+    bmi = weight / (height ** 2)
+    return round(bmi, 2)
 
 # def reverse_string(s):
 #     """
@@ -80,15 +96,15 @@ def fibonacci(n):
 #     """
 #     return s[::-1]
 
-def generate_password(length=12):
-#     """
-#     Generate a random password of given length
-#     """
-    import random
-    import string
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(characters) for _ in range(length))
-    return password
+# def generate_password(length=12):
+# #     """
+# #     Generate a random password of given length
+# #     """
+#     import random
+#     import string
+#     characters = string.ascii_letters + string.digits + string.punctuation
+#     password = ''.join(random.choice(characters) for _ in range(length))
+#     return password
 
 # New functions added without test cases
 
