@@ -1,5 +1,6 @@
 import pytest
 from main import Calculator, Greeter, factorial, is_prime, fibonacci
+from additional_func import celsius_to_fahrenheit, count_vowels
 
 def test_calculator_add():
     calc = Calculator()
@@ -87,6 +88,20 @@ def test_factorial_edge_cases():
 def test_fibonacci_edge_cases():
     assert fibonacci(3) == [0, 1, 1]
     assert fibonacci(4) == [0, 1, 1, 2]
+
+#from 2nd file
+def test_celsius_to_fahrenheit():
+    assert celsius_to_fahrenheit(0) == 32
+    assert celsius_to_fahrenheit(100) == 212
+    assert celsius_to_fahrenheit(-40) == -40
+    assert round(celsius_to_fahrenheit(37), 2) == 98.60
+
+def test_count_vowels():
+    assert count_vowels("hello") == 2
+    assert count_vowels("AEIOU") == 5
+    assert count_vowels("rhythm") == 0
+    assert count_vowels("The quick brown fox") == 5
+    assert count_vowels("") == 0
 
 if __name__ == "__main__":
     pytest.main()
